@@ -35,7 +35,7 @@ public class SpriteObject : Editor
         
         selectedIndex = generateObject._selectionCache;
         EditorGUI.BeginChangeCheck();
-        switch (selectedIndex = EditorGUILayout.Popup(selectedIndex, new[] { "Iconic", "Module Maze" }))
+        switch (selectedIndex = EditorGUILayout.Popup(selectedIndex, new[] { "Iconic", "Module Maze", "Banner" })) //To clarify, at the time of writing, "Banner" is not a module
         {
             case 1:
                 GenerateMasterSprite.ModuleJsonPath = Path.Combine(Path.GetDirectoryName(GenerateMasterSprite.ModuleJsonPath), "ModuleMazeSetup.json");
@@ -43,6 +43,15 @@ public class SpriteObject : Editor
                 {
                     generateObject._colsCache = generateObject.cols;
                     generateObject.cols = 20;
+                    generateObject._selectionCache = selectedIndex;
+                }
+                break;
+            case 2:
+                GenerateMasterSprite.ModuleJsonPath = Path.Combine(Path.GetDirectoryName(GenerateMasterSprite.ModuleJsonPath), "BannerSetup.json");
+                if (EditorGUI.EndChangeCheck())
+                {
+                    generateObject._colsCache = generateObject.cols;
+                    generateObject.cols = 64;
                     generateObject._selectionCache = selectedIndex;
                 }
                 break;
