@@ -35,7 +35,7 @@ public class SpriteObject : Editor
         
         selectedIndex = generateObject._selectionCache;
         EditorGUI.BeginChangeCheck();
-        switch (selectedIndex = EditorGUILayout.Popup(selectedIndex, new[] { "Iconic", "Module Maze", "Banner" })) //To clarify, at the time of writing, "Banner" is not a module
+        switch (selectedIndex = EditorGUILayout.Popup(selectedIndex, new[] { "Iconic", "Module Maze", "Banner", "The Hyperlink" })) //To clarify, at the time of writing, "Banner" is not a module
         {
             case 1:
                 GenerateMasterSprite.ModuleJsonPath = Path.Combine(Path.GetDirectoryName(GenerateMasterSprite.ModuleJsonPath), "ModuleMazeSetup.json");
@@ -52,6 +52,15 @@ public class SpriteObject : Editor
                 {
                     generateObject._colsCache = generateObject.cols;
                     generateObject.cols = 64;
+                    generateObject._selectionCache = selectedIndex;
+                }
+                break;
+            case 3:
+                GenerateMasterSprite.ModuleJsonPath = Path.Combine(Path.GetDirectoryName(GenerateMasterSprite.ModuleJsonPath), "TheHyperlinkSetup.json");
+                if (EditorGUI.EndChangeCheck())
+                {
+                    generateObject._colsCache = generateObject.cols;
+                    generateObject.cols = 41; //this number perfectly divides the 123 modules in the module, in case you were wondering
                     generateObject._selectionCache = selectedIndex;
                 }
                 break;
